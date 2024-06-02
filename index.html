@@ -1999,7 +1999,7 @@
     </style>
   </head>
   <body>
-    <audio autoplay loop>
+    <audio id="background-music" loop>
       <source src="audio.mp3" type="audio/mpeg" />
       Your browser does not support the audio element.
     </audio>
@@ -3142,6 +3142,20 @@
           replay: true,
         });
       })();
+    </script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        var audio = document.getElementById('background-music');
+
+        function playMusic() {
+          audio.play();
+          document.removeEventListener('click', playMusic);
+        }
+
+        audio.play().catch(function () {
+          document.addEventListener('click', playMusic);
+        });
+      });
     </script>
   </body>
 </html>
